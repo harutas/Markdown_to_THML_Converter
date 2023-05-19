@@ -22,7 +22,7 @@ def convertMarkdownToHTML(mdString):
 # check argument count
 def checkArgumentCount(args, targetCount = 4):
   if len(args) != targetCount:
-    print("エラー: 不適切な引数の数です。正しい引数の数を指定してください。")
+    print(f"エラー: 不適切な引数の数です。正しい引数の数は{targetCount}です。")
     print("使用法: python file_converter.py markdown sample.md sample.html")
     sys.exit(1)
 
@@ -44,7 +44,7 @@ def checkFilepathExists(filepath):
 def checkFileExtension(filepath, targetExtension):
   _, ext = os.path.splitext(filepath)
   if ext != targetExtension:
-    print(f"エラー：ファイルパス {filepath} の拡張子が適切ではありません。")
+    print(f"エラー：ファイル {filepath} の拡張子が適切ではありません。使用できる拡張子は{ext}です。")
     print("使用法: python file_converter.py markdown sample.md sample.html")
     sys.exit(1)
 
