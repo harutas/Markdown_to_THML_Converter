@@ -26,7 +26,7 @@
 ```
 >python file_converter.py markdown
 Error!!
-エラー: 不適切な引数の数です。正しい引数の数を指定してください。
+エラー: 不適切な引数の数です。正しい引数の数は4です。
 使用法: python file_converter.py markdown sample.md sample.html
 
 >python file_converter.py Markdown sample.md sample.html
@@ -41,7 +41,7 @@ Error!!
 
 >python file_converter.py markdown dummy.html sample.html
 Error!!
-エラー：ファイルパス dummy.html の拡張子が適切ではありません。
+エラー：ファイルパス dummy.html の拡張子が適切ではありません。使用できる拡張子は.mdです。
 使用法: python file_converter.py markdown sample.md sample.html
 ```
 
