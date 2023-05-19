@@ -47,6 +47,12 @@ def checkFileExtension(filepath, targetExtension):
     print(f"エラー：ファイル {filepath} の拡張子が適切ではありません。使用できる拡張子は{ext}です。")
     print("使用法: python file_converter.py markdown sample.md sample.html")
     sys.exit(1)
+  
+# ファイルのディレクトリが存在しない場合にディレクトリを作成する
+def ensureDirectoryExists(file_path):
+  directory = os.path.dirname(file_path)
+  if not os.path.exists(directory):
+    os.makedirs(directory, exist_ok=True)
 
 def validateFiles(command, inputfilePath, outputfilePath):
   # command check
@@ -66,12 +72,29 @@ def main(args):
   
   mdContent = ""
   # read md
-  with open(inputfilePath, "r", encoding="utf-8") as f:
-    mdContent = f.read()
+  try:
+    with open(inputfilePath, "r", encoding="utf-8") as f:
+      mdContent = f.read()
+  except FileNotFoundError:
+      print(f"エラー: ファイル '{inputfilePath}' が見つかりませんでした。")
+  except IOError:
+      print(f"エラー: ファイル '{inputfilePath}' の読み取り中にエラーが発生しました。")
+  except Exception as e:
+      print(f"予期せぬエラーが発生しました: {e}")
+      
   # write html
-  with open(outputfilePath, "w", encoding="utf-8") as f:
-    htmlstring = convertMarkdownToHTML(mdContent)
-    f.write(htmlstring)
+  try:
+    ensureDirectoryExists(outputfilePath)
+    with open(outputfilePath, "w", encoding="utf-8") as f:
+      htmlstring = convertMarkdownToHTML(mdContent)
+      f.write(htmlstring)
+  except FileNotFoundError:
+      print(f"エラー: ファイル '{outputfilePath}' のパスに存在しないフォルダが含まれています。")
+  except IOError:
+      print(f"エラー: ファイル '{outputfilePath}' の書き込み中にエラーが発生しました。")
+  except Exception as e:
+      print(f"予期せぬエラーが発生しました: {e}")
   
 if __name__ == "__main__":
   main(sys.argv)
+
