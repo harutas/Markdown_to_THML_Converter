@@ -84,9 +84,3 @@ python file_converter.py markdown inputfile outputfile
 - markdown 実行するコマンド(現在は markdown のみ)
 - inputfile .md ファイルへのパス
 - outputfile プログラムを実行した後に作成される.html ファイルのパス
-
-具体的な使用例
-
-```shell
-python file_converter.py markdown sample.md sample.html
-```
